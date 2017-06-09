@@ -21,20 +21,7 @@ class MatchAgainst extends FunctionNode
     public function parse(\Doctrine\ORM\Query\Parser $parser)
     {
 
-//        $parser->match(Lexer::T_IDENTIFIER);
-//        $parser->match(Lexer::T_OPEN_PARENTHESIS);
-//
-//        do {
-//            $this->columns[] = $parser->StateFieldPathExpression();
-//            $parser->match(Lexer::T_COMMA);
-//        } while (!$parser->getLexer()->isNextToken(Lexer::T_INPUT_PARAMETER));
-//
-//        // Got an input parameter
-//        $this->needle = $parser->InputParameter();
-//
-//        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
-
-                $parser->match(Lexer::T_IDENTIFIER);
+        $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
         do {
             $this->columns[] = $parser->StateFieldPathExpression();
@@ -59,10 +46,7 @@ class MatchAgainst extends FunctionNode
         $query = "MATCH(".$haystack.
             ") AGAINST (".$this->needle->dispatch($sqlWalker);
 
-        //var_dump(trim($this->mode->dispatch($sqlWalker), "'"));
-
         if ($this->mode) {
-            //$query .= " ".$this->mode->dispatch($sqlWalker)." )";
             $query .= " " . trim($this->mode->dispatch($sqlWalker), "'") . " )";
         } else {
             $query .= " )";
